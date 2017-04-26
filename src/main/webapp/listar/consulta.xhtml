@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="ISO-8859-1" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:b="http://bootsfaces.net/ui">
+
+<ui:composition template="/admin/template.xhtml">
+
+<ui:define name="content">
+
+	<div style="padding-top: 20px" class="panel-body col-xs-12">
+		<h:form id="form" role="form">
+			<h1>Alunos</h1>
+			<hr></hr>
+		
+			<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" globalOnly="true" showIcon="true" />
+			
+			<p:spacer height="20px"></p:spacer>
+			
+			<div class="controls">
+				<b:commandButton value="Adicionar" icon="plus" class="btn btn-primary" actionListener="#{consultaAlunoController.novo()}" />
+			</div>
+			
+			<p:spacer height="20px"></p:spacer>
+			
+			<div style="width: 700px">
+				<b:dataTable id="tableAluno" value="#{consultaAlunoController.alunos}" var="aluno" customLangUrl="#{resource['lang/pt-br.json']}" >
+				    <b:dataTableColumn label="Nome" style="width:50%">
+				    	<h:commandLink actionListener="#{consultaAlunoController.editar(aluno.id)}" value="#{aluno.nome}" >
+						</h:commandLink>
+				    </b:dataTableColumn>
+				    <b:dataTableColumn label="Login" style="width:50%" value="#{aluno.email}">
+				    </b:dataTableColumn>
+				    <b:dataTableColumn label="Excluir" style-class="table-excluir">
+				    	
+				    	<p:commandLink actionListener="#{consultaAlunoController.excluir(aluno)}" update="@form" ajax="true">
+				    		<p:confirm header="Atenção!" message="Confirma a exclusão deste item?" icon="ui-icon-alert" />
+							<span class="glyphicon glyphicon-remove" aria-hidden="true" style="color: red;"></span>
+						</p:commandLink>
+				    </b:dataTableColumn>
+				</b:dataTable>
+			</div>
+		</h:form>
+
+	</div>
+	
+</ui:define>
+
+</ui:composition>
+
+</html>
