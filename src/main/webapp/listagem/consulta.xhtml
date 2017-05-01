@@ -7,44 +7,46 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:b="http://bootsfaces.net/ui">
 
-<ui:composition template="/admin/template.xhtml">
+<ui:composition template="/template.xhtml">
 
 <ui:define name="content">
 
 	<div style="padding-top: 20px" class="panel-body col-xs-12">
-		<h:form id="form" role="form">
-			<h1>Alunos</h1>
+		<h:form id="alunoForm">
+			<h1>#{cadastroAlunoController.aluno.id == null ? 'Relatório de Registro': 'Aluno: '.concat(cadastroAlunoController.aluno.nome)}</h1>
 			<hr></hr>
 		
 			<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" globalOnly="true" showIcon="true" />
 			
 			<p:spacer height="20px"></p:spacer>
 			
-			<div class="controls">
-				<b:commandButton value="Adicionar" icon="plus" class="btn btn-primary" actionListener="#{consultaAlunoController.novo()}" />
-			</div>
+			<h:panelGrid columns="2" columnClasses="column-padding, column-left" width="100%" styleClass="marginBottomForm">
+				<p:outputLabel for="nome" value="Nome:" />
+				<p:inputText id="nome" value="#{cadastroAlunoController.aluno.nome}" class="form-control" style="width: 300px" required="true"/>
+			</h:panelGrid>	
 			
-			<p:spacer height="20px"></p:spacer>
+			<h:panelGrid columns="2" columnClasses="column-padding, column-left" width="100%" styleClass="marginBottomForm">
+				<p:outputLabel for="login" value="Email:" />
+				<p:inputText id="login" value="#{cadastroAlunoController.aluno.email}" class="form-control" style="width: 300px" required="true"/>
+			</h:panelGrid>	
 			
-			<div style="width: 700px">
-				<b:dataTable id="tableAluno" value="#{consultaAlunoController.alunos}" var="aluno" customLangUrl="#{resource['lang/pt-br.json']}" >
-				    <b:dataTableColumn label="Nome" style="width:50%">
-				    	<h:commandLink actionListener="#{consultaAlunoController.editar(aluno.id)}" value="#{aluno.nome}" >
-						</h:commandLink>
-				    </b:dataTableColumn>
-				    <b:dataTableColumn label="Login" style="width:50%" value="#{aluno.email}">
-				    </b:dataTableColumn>
-				    <b:dataTableColumn label="Excluir" style-class="table-excluir">
-				    	
-				    	<p:commandLink actionListener="#{consultaAlunoController.excluir(aluno)}" update="@form" ajax="true">
-				    		<p:confirm header="Atenção!" message="Confirma a exclusão deste item?" icon="ui-icon-alert" />
-							<span class="glyphicon glyphicon-remove" aria-hidden="true" style="color: red;"></span>
-						</p:commandLink>
-				    </b:dataTableColumn>
-				</b:dataTable>
-			</div>
+			<h:panelGrid columns="2" columnClasses="column-padding, column-left" width="100%" styleClass="marginBottomForm">
+				<h:panelGroup />
+				
+				<h:panelGroup>
+					<b:commandButton value="Salvar" class="btn btn-primary" actionListener="#{cadastroAlunoController.salvar()}"></b:commandButton>
+					<a href="/admin/aluno/consulta.xhtml" class="btn btn-warn" >
+						<h:commandButton type="button" class="btn btn-default" value="Voltar"></h:commandButton>
+					</a>
+					<h:panelGroup rendered="#{cadastroAlunoController.aluno.id != null}">
+						<a href="/admin/aluno/cadastro.xhtml" class="btn btn-warn" >
+							<h:commandButton type="button" class="btn btn-success" value="Novo"></h:commandButton>
+						</a>
+					</h:panelGroup>
+				</h:panelGroup>
+			</h:panelGrid>
+				
 		</h:form>
-
 	</div>
 	
 </ui:define>

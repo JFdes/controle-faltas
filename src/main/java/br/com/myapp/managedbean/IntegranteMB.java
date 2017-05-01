@@ -1,7 +1,9 @@
-package br.com.myapp.managedbean.integrante;
+package br.com.myapp.managedbean;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
@@ -18,7 +20,8 @@ import br.com.myapp.service.IntegranteService;
 @ManagedBean
 @ViewScoped
 public class IntegranteMB {
-
+	
+	
 	private String nome;
 
 	private String cpf;
@@ -46,29 +49,10 @@ public class IntegranteMB {
 	public void init() {
 
 	}
-
-	public void salvar() {
-
-		try {
-
-			final Integrante integrante = new Integrante();
-			integrante.setCep("9999-999");
-			integrante.setCidade("Recife");
-			integrante.setCpf("999.999.999-99");
-			integrante.setDataNascimento(Calendar.getInstance().getTime());
-			integrante.setEmail("abc@abc.com");
-			integrante.setLogradouro("rua");
-			integrante.setNome("teste");
-			integrante.setNumero("s/n");
-			integrante.setSexo(Sexo.M);
-			integrante.setUf("pe");
-
-			this.integranteService.criar(integrante);
-		} catch (final BusinessException e) {
-			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Aviso!", "erro"));
-		}
-	}
-
+	private Integrante integrante = new Integrante();
+	private List<Integrante> integrantes = new ArrayList<Integrante>();	
+	
+	
 	public String getNome() {
 
 		return this.nome;
@@ -168,5 +152,48 @@ public class IntegranteMB {
 
 		this.cep = cep;
 	}
+
+	public Integrante getIntegrante() {
+		return integrante;
+	}
+
+	public void setIntegrante(Integrante integrante) {
+		this.integrante = integrante;
+	}
+	
+	public List<Integrante> getIntegrantes() throws BusinessException {
+		integrantes=(List<Integrante>) integranteService.buscarTodos();
+		return integrantes;
+	}
+
+	public void setIntegrantes(List<Integrante> integrantes) {
+		this.integrantes = integrantes;
+	}
+	
+	
+	
+	public void salvar() {
+
+		try {
+
+			integrante.setCep(getCep());
+			integrante.setCidade(getCidade());
+			integrante.setCpf(getCpf());
+			integrante.setDataNascimento(Calendar.getInstance().getTime());
+			integrante.setEmail(getEmail());
+			integrante.setLogradouro(getLogradouro());
+			integrante.setNome(getNome());
+			integrante.setNumero(getNumero());
+			integrante.setSexo(Sexo.M);
+			integrante.setUf(getUf());
+
+			this.integranteService.criar(integrante);
+		} catch (final BusinessException e) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Aviso!", "erro"));
+		}
+	}
+
+	
+	
 
 }

@@ -13,36 +13,75 @@
 
 	<div style="padding-top: 20px" class="panel-body col-xs-12">
 		<h:form id="alunoForm">
-			<h1>#{cadastroAlunoController.aluno.id == null ? 'Novo Aluno': 'Aluno: '.concat(cadastroAlunoController.aluno.nome)}</h1>
+			<h1>#{integranteMB.integrante.id == null ? 'Cadastro de Integrante': 'Integrante Cadastrado: '.concat(integranteMB.integrante.nome)}</h1>
 			<hr></hr>
 		
 			<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" globalOnly="true" showIcon="true" />
 			
 			<p:spacer height="20px"></p:spacer>
 			
+			
+			
 			<h:panelGrid columns="2" columnClasses="column-padding, column-left" width="100%" styleClass="marginBottomForm">
 				<p:outputLabel for="nome" value="Nome:" />
-				<p:inputText id="nome" value="#{cadastroAlunoController.aluno.nome}" class="form-control" style="width: 300px" required="true"/>
+				<p:inputText id="nome" value="#{integranteMB.integrante.nome}" class="form-control" style="width: 500px" required="true"/>
 			</h:panelGrid>	
+			
+			
+			
+			
+			<h:panelGrid columns="2" columnClasses="column-padding, column-left" width="100%" styleClass="marginBottomForm">
+				<p:outputLabel for="cpf" value="CPF:" />
+				<p:inputText id="cpf" value="#{integranteMB.integrante.cpf}" class="form-control" style="width: 300px" required="true"/>
+			</h:panelGrid>
+			
+			
 			
 			<h:panelGrid columns="2" columnClasses="column-padding, column-left" width="100%" styleClass="marginBottomForm">
 				<p:outputLabel for="login" value="Email:" />
-				<p:inputText id="login" value="#{cadastroAlunoController.aluno.email}" class="form-control" style="width: 300px" required="true"/>
+				<p:inputText id="login" value="#{integranteMB.integrante.email}" class="form-control" style="width: 400px" required="true"/>
+			</h:panelGrid>
+			
+			
+			
+			<h:panelGrid columns="2" columnClasses="column-padding, column-left" width="100%" styleClass="marginBottomForm">
+				<p:outputLabel for="logradouro" value="Logradouro" />
+				<p:inputText id="logradouro" value="#{integranteMB.integrante.logradouro}" class="form-control" style="width: 500px" required="true"/>
 			</h:panelGrid>	
+			
+			
+			<h:panelGrid columns="2" columnClasses="column-padding, column-left" width="100%" styleClass="marginBottomForm">
+				<p:outputLabel for="numero" value="Numero" />
+				<p:inputText id="numero" value="#{integranteMB.integrante.numero}" class="form-control" style="width: 70px" required="true"/>
+			</h:panelGrid>	
+			
+			
+			<h:panelGrid columns="2" columnClasses="column-padding, column-left" width="100%" styleClass="marginBottomForm">
+				<p:outputLabel for="cidade" value="Cidade" />
+				<p:inputText id="cidade" value="#{integranteMB.integrante.cidade}" class="form-control" style="width: 300px" required="true"/>
+			</h:panelGrid>
+			
+			<h:panelGrid columns="2" columnClasses="column-padding, column-left" width="100%" styleClass="marginBottomForm">
+				<p:outputLabel for="uf" value="UF" />
+				<p:inputText id="uf" value="#{integranteMB.integrante.uf}" class="form-control" style="width: 50px" required="true"/>
+			</h:panelGrid>
+			
+			
+			<h:panelGrid columns="2" columnClasses="column-padding, column-left" width="100%" styleClass="marginBottomForm">
+				<p:outputLabel for="cep" value="CEP" />
+				<p:inputText id="cep" value="#{integranteMB.integrante.cep}" class="form-control" style="width: 300px" required="true"/>
+			</h:panelGrid>
 			
 			<h:panelGrid columns="2" columnClasses="column-padding, column-left" width="100%" styleClass="marginBottomForm">
 				<h:panelGroup />
 				
 				<h:panelGroup>
-					<b:commandButton value="Salvar" class="btn btn-primary" actionListener="#{cadastroAlunoController.salvar()}"></b:commandButton>
-					<a href="/admin/aluno/consulta.xhtml" class="btn btn-warn" >
-						<h:commandButton type="button" class="btn btn-default" value="Voltar"></h:commandButton>
+					<b:commandButton value="Salvar" class="btn btn-primary" actionListener="#{integranteMB.salvar()}"></b:commandButton>
+					<a href="/myapp/integrantes/cadastro.xhtml" class="btn btn-warn" >
+						
 					</a>
-					<h:panelGroup rendered="#{cadastroAlunoController.aluno.id != null}">
-						<a href="/admin/aluno/cadastro.xhtml" class="btn btn-warn" >
-							<h:commandButton type="button" class="btn btn-success" value="Novo"></h:commandButton>
-						</a>
-					</h:panelGroup>
+					
+							
 				</h:panelGroup>
 			</h:panelGrid>
 				
