@@ -27,21 +27,28 @@
 				<p:inputText id="nome" value="#{integranteMB.integrante.nome}" class="form-control" style="width: 500px" required="true"/>
 			</h:panelGrid>	
 			
-			
-			
-			
 			<h:panelGrid columns="2" columnClasses="column-padding, column-left" width="100%" styleClass="marginBottomForm">
 				<p:outputLabel for="cpf" value="CPF:" />
 				<p:inputText id="cpf" value="#{integranteMB.integrante.cpf}" class="form-control" style="width: 300px" required="true"/>
 			</h:panelGrid>
 			
-			
-			
 			<h:panelGrid columns="2" columnClasses="column-padding, column-left" width="100%" styleClass="marginBottomForm">
-				<p:outputLabel for="login" value="Email:" />
-				<p:inputText id="login" value="#{integranteMB.integrante.email}" class="form-control" style="width: 400px" required="true"/>
+				<p:outputLabel for="dataNascimento" value="Data Nascimento:" />
+        		<p:calendar id="dataNascimento" value="#{integranteMB.integrante.dataNascimento}" pattern="dd-MM-yyyy" mask="true" />
 			</h:panelGrid>
 			
+			<h:panelGrid columns="2" columnClasses="column-padding, column-left" width="100%" styleClass="marginBottomForm">
+				<p:outputLabel for="sexo" value="Sexo:" />
+		        <p:selectOneMenu id="sexo" value="#{integranteMB.integrante.sexo}" style="width:125px">
+		            <f:selectItem itemLabel="Selecione..." itemValue="" />
+		            <f:selectItems value="#{integranteMB.sexos}" var="sexo" itemLabel="#{sexo.value}" itemValue="#{sexo}" />
+		        </p:selectOneMenu>
+		    </h:panelGrid>
+			
+			<h:panelGrid columns="2" columnClasses="column-padding, column-left" width="100%" styleClass="marginBottomForm">
+				<p:outputLabel for="email" value="Email:" />
+				<p:inputText id="email" value="#{integranteMB.integrante.email}" class="form-control" style="width: 400px" required="true"/>
+			</h:panelGrid>
 			
 			
 			<h:panelGrid columns="2" columnClasses="column-padding, column-left" width="100%" styleClass="marginBottomForm">
