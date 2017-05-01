@@ -61,4 +61,10 @@ public class IntegranteServiceImpl implements IntegranteService {
 		}
 	}
 
+	@Override
+	public Integrante buscar(final Long id) throws BusinessException {
+
+		return this.dao.buscar(id);
+	}
+
 }

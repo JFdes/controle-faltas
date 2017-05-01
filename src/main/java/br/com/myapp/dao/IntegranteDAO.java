@@ -18,4 +18,6 @@ public interface IntegranteDAO {
 
 	public void deletar(final Integrante integrante) throws DAOException;
 
+	public Integrante buscar(final Long id) throws DAOException;
+
 }

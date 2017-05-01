@@ -54,7 +54,10 @@ public class IntegranteDAOImpl implements IntegranteDAO {
 	public void deletar(final Integrante integrante) throws DAOException {
 
 		try {
-			this.em.remove(integrante);
+			final String jpql = "delete from Integrante where id = :id";
+			final Query query = this.em.createQuery(jpql);
+			query.setParameter("id", integrante.getId());
+			query.executeUpdate();
 		} catch (final Exception e) {
 			throw new DAOException(e);
 		}
@@ -68,6 +71,19 @@ public class IntegranteDAOImpl implements IntegranteDAO {
 	public void setEm(final EntityManager em) {
 
 		this.em = em;
+	}
+
+	@Override
+	public Integrante buscar(final Long id) throws DAOException {
+
+		try {
+			final String jpql = "select i from Integrante i where i.id = :id";
+			final Query query = this.em.createQuery(jpql, Integrante.class);
+			query.setParameter("id", id);
+			return (Integrante) query.getSingleResult();
+		} catch (final Exception e) {
+			throw new DAOException(e);
+		}
 	}
 
 }

@@ -1,17 +1,23 @@
 package br.com.myapp.managedbean;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.FacesException;
 import javax.faces.application.FacesMessage;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.ViewScoped;
+import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
+
+import org.apache.commons.lang3.StringUtils;
 
 import br.com.myapp.exception.BusinessException;
 import br.com.myapp.model.Integrante;
@@ -52,37 +58,62 @@ public class IntegranteMB {
 	@PostConstruct
 	public void init() {
 
+		final String id = this.getParam("id");
+
+		if (StringUtils.isNotBlank(id)) {
+
+			try {
+				this.integrante = this.integranteService.buscar(Long.valueOf(id));
+			} catch (final BusinessException e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
-		
-	public String salvar() {
+	public void salvar() {
 
 		try {
 
 			this.integranteService.criar(this.integrante);
-			
-			} catch (final BusinessException e) {
+		} catch (final BusinessException e) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Aviso!", "erro"));
 		}
-		
-		return "/myapp/faltas/registro.xhtml";
+
+		this.doRedirect("/faltas/registro.xhtml");
 	}
-	
-	
-	public String editar() {
-		return "/myapp/integrantes/cadastro";
-			
+
+	public void editar() {
+
+		this.doRedirect("/integrantes/cadastro.xhtml?id=" + this.integrante.getId());
 	}
-	
-	public void remover(){
+
+	public void remover() {
+
 		try {
 
 			this.integranteService.deletar(this.integrante);
-			
-			} catch (final BusinessException e) {
+		} catch (final BusinessException e) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Aviso!", "erro"));
 		}
-		
+	}
+
+	public void doRedirect(final String redirectPage) throws FacesException {
+
+		final ExternalContext externalContext = FacesContext.getCurrentInstance().getExternalContext();
+
+		try {
+			externalContext.redirect(externalContext.getRequestContextPath().concat(redirectPage));
+		} catch (final IOException e) {
+			throw new FacesException(e);
+		}
+	}
+
+	public String getParam(final String param) {
+
+		final FacesContext context = FacesContext.getCurrentInstance();
+		final Map<String, String> paramMap = context.getExternalContext().getRequestParameterMap();
+		final String projectId = paramMap.get(param);
+		return projectId;
 	}
 
 	public Collection<Sexo> getSexos() {

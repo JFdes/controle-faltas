@@ -18,4 +18,6 @@ public interface IntegranteService {
 
 	public void deletar(final Integrante integrante) throws BusinessException;
 
+	public Integrante buscar(final Long id) throws BusinessException;
+
 }
