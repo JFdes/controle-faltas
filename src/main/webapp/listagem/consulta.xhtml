@@ -13,11 +13,11 @@
 
 		<div style="padding-top: 20px" class="panel-body col-xs-12">
 
-			<h1>Editar/Relatório de Integrantes</h1>
+			<h1><img src="../resources/images/listar.png" />Relatório de Integrantes</h1>
 			<hr></hr>
 			
 			
-			<h:dataTable value="#{integranteMB.integrantes}" var="item" width="60%" border="1">
+			<h:dataTable value="#{integranteMB.integrantes}" var="item" width="80%" border="1">
 
 				<h:column>
 					<f:facet name="header">ID</f:facet>
@@ -29,15 +29,41 @@
 						#{item.nome}		
 				</h:column>
 				
+				<h:column>
+					<f:facet name="header">CPF</f:facet>
+						#{item.cpf}		
+				</h:column>
+				
 				<h:column >
 					<f:facet name="header">SEXO</f:facet>
 						#{item.sexo}		
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">LOGRADOURO</f:facet>
+						#{item.logradouro}		
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">NÚMERO</f:facet>
+						#{item.numero}		
 				</h:column>
 
 				<h:column>
 					<f:facet name="header">CIDADE</f:facet>
 					#{item.cidade}		
 				</h:column>
+				
+				<h:column>
+					<f:facet name="header">UF</f:facet>
+					#{item.uf}		
+				</h:column>
+				
+				<h:column>
+					<f:facet name="header">CEP</f:facet>
+					#{cep.uf}		
+				</h:column>				
+				
 
 			</h:dataTable>
 

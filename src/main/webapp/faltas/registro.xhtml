@@ -13,7 +13,7 @@
 
 		<div style="padding-top: 20px" class="panel-body col-xs-12">
 
-			<h1>Editar/Registar Integrantes</h1>
+			<h1><img src="../resources/images/registrar.png" />Editar/Registar Integrantes</h1>
 			<hr></hr>
 			
 		<h:form>	
@@ -35,18 +35,13 @@
 				</h:column>
 
 				<h:column>
-					<f:facet name="header">CIDADE</f:facet>
-					#{item.cidade}		
-				</h:column>
-				
-				<h:column>
-					<h:commandLink action="#{integranteMB.editar()}">Editar
+					<h:commandLink action="#{integranteMB.editar()}"><img src="img/lapis.png" />
 						<f:setPropertyActionListener value="#{item}" target="#{integranteMB.integrante}"/>
 					</h:commandLink>
 				</h:column>
 				
 				<h:column>
-					<h:commandLink action="#{integranteMB.remover()}">Remover
+					<h:commandLink action="#{integranteMB.remover()}"><img src="img/lixeira.png" />
 						<f:setPropertyActionListener value="#{item}" target="#{integranteMB.integrante}"/>
 					</h:commandLink>
 				</h:column>
