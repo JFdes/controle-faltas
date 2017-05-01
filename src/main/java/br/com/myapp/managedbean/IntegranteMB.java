@@ -54,14 +54,33 @@ public class IntegranteMB {
 
 	}
 
+		
 	public void salvar() {
 
 		try {
 
 			this.integranteService.criar(this.integrante);
-		} catch (final BusinessException e) {
+			
+			} catch (final BusinessException e) {
 			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Aviso!", "erro"));
 		}
+	}
+	
+	
+	public String editar() {
+		return "/myapp/integrantes/cadastro";
+			
+	}
+	
+	public void remover(){
+		try {
+
+			this.integranteService.deletar(this.integrante);
+			
+			} catch (final BusinessException e) {
+			FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Aviso!", "erro"));
+		}
+		
 	}
 
 	public Collection<Sexo> getSexos() {

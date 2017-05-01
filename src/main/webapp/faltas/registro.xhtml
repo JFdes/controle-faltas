@@ -15,27 +15,47 @@
 
 			<h1>Editar/Registar Integrantes</h1>
 			<hr></hr>
-
-			<h:dataTable value="#{integranteMB.integrantes}" var="item">
+			
+		<h:form>	
+			<h:dataTable value="#{integranteMB.integrantes}" var="item" width="60%" border="1">
 
 				<h:column>
-					#{item.id}		
+					<f:facet name="header">ID</f:facet>
+						#{item.id}		
 				</h:column>
 
 				<h:column>
-					#{item.nome}		
+					<f:facet name="header">NOME</f:facet>
+						#{item.nome}		
+				</h:column>
+				
+				<h:column >
+					<f:facet name="header">SEXO</f:facet>
+						#{item.sexo}		
 				</h:column>
 
 				<h:column>
+					<f:facet name="header">CIDADE</f:facet>
 					#{item.cidade}		
 				</h:column>
-
-
+				
+				<h:column>
+					<h:commandLink action="#{integranteMB.editar()}">Editar
+						<f:setPropertyActionListener value="#{item}" target="#{integranteMB.integrante}"/>
+					</h:commandLink>
+				</h:column>
+				
+				<h:column>
+					<h:commandLink action="#{integranteMB.remover()}">Remover
+						<f:setPropertyActionListener value="#{item}" target="#{integranteMB.integrante}"/>
+					</h:commandLink>
+				</h:column>
+				
+			
+				
 
 			</h:dataTable>
-
-
-
+		</h:form>
 
 		</div>
 
