@@ -23,7 +23,7 @@ public class Integrante implements Serializable {
 	@GeneratedValue(strategy = GenerationType.SEQUENCE, generator = "sq_integrante")
 	@SequenceGenerator(name = "sq_integrante", sequenceName = "sq_integrante", allocationSize = 1)
 	@Column(name = "ROW_ID")
-	private Long id;
+	public Long id;
 
 	@Column(name = "NOME")
 	private String nome;

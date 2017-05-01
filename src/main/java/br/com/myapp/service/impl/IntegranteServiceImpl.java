@@ -22,7 +22,12 @@ public class IntegranteServiceImpl implements IntegranteService {
 
 		try {
 
-			this.dao.criar(integrante);
+			if(integrante.id==null){
+				this.dao.criar(integrante);
+			}
+			else
+				atualizar(integrante);
+			
 		} catch (final DAOException e) {
 			throw new BusinessException(e);
 		}
